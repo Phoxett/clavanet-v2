@@ -208,4 +208,5 @@ ENV/
 *.iml
 .DS_Store
 
-git.config
+.config
+.test
