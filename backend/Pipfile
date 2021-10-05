@@ -8,8 +8,9 @@ sqlalchemy = "*"
 psycopg2-binary = "*"
 flask = "*"
 marshmallow = "*"
+flask-cors = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
