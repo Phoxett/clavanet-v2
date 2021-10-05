@@ -12,10 +12,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 
 engine = create_engine(
-    f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_URL}/{DB_NAME}',
-    connect_args={
-        "check_same_thread": False
-    }
+    f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_URL}/{DB_NAME}'
 )
 
 Session = scoped_session(sessionmaker(

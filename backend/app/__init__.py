@@ -21,4 +21,13 @@ def create_app():
 
     @app.teardown_appcontext
     def remove_session(*args, **kwargs):
-        db.remove()
+        pass #db.remove()
+    
+
+    with app.app_context():
+
+        from .teacher import teacher
+
+        app.register_blueprint(teacher.teacherbp)
+
+        return app

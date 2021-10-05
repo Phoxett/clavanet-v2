@@ -1,18 +1,22 @@
-
 from datetime import datetime as dt
-from sqlalchemy import  Column, String, Integer, DateTime
+from sqlalchemy import  Column
+from sqlalchemy import  String
+from sqlalchemy import  Integer
+from sqlalchemy import  DateTime
 
 
 class DictMixin:
     def to_dict(self):
-        return {
+        return \
+            {
             column.name: getattr(self, column.name)
             if not isinstance(
                 getattr(self, column.name), (dt, dt.date)
             )
             else getattr(self, column.name).isoformat()
             for column in self.__table__.columns
-        }
+            }
+
 
 class User(DictMixin):
 
@@ -25,4 +29,14 @@ class User(DictMixin):
         self.created_at = dt.now()
         self.updated_at = dt.now()
         self.name = name
+
+
+class JSONMixin:
+
+    @staticmethod
+    def to_json(stable, table_query, many=False):
+
+        schema = stable(many=many)
+        json = schema.dump(table_query)
+        return json
 
