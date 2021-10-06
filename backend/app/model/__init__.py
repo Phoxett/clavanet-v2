@@ -1,3 +1,2 @@
-from .model import JSONMixin
-from .teacher import STeacher
+from .model import Extra
 from .teacher import Teacher

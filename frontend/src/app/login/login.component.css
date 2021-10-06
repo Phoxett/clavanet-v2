@@ -1,0 +1,25 @@
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.icon-display {
+  transform: scale(1.7);
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.marginMin
+{
+  margin-top: -60px;
+}
+
+form 
+{
+  padding: 20px;
+}
+
+.mat-card-title
+{
+  font-size: 25px;
+  text-align: center;
+}

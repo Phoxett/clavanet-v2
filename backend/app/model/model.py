@@ -1,9 +1,28 @@
 from datetime import datetime as dt
-from sqlalchemy import  Column
-from sqlalchemy import  String
-from sqlalchemy import  Integer
-from sqlalchemy import  DateTime
+from .. import db
 
+
+class User:
+
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    name = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime)
+    updated_at = db.Column(db.DateTime)
+
+    def __init__(self, name):
+        self.created_at = dt.now()
+        self.updated_at = dt.now()
+        self.name = name
+
+
+class Extra(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    name = db.Column(db.String, nullable=False)
+    value = db.Column(db.String, nullable=False)
+    teacheruid = db.Column(db.String, db.ForeignKey('teacher.uid'), nullable=True)
+    studentuid = db.Column(db.String, db.ForeignKey('student.uid'), nullable=True)
+    schooluid = db.Column(db.String, db.ForeignKey('school.uid'), nullable=True)
 
 class DictMixin:
     def to_dict(self):
@@ -16,27 +35,3 @@ class DictMixin:
             else getattr(self, column.name).isoformat()
             for column in self.__table__.columns
             }
-
-
-class User(DictMixin):
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
-
-    def __init__(self, name):
-        self.created_at = dt.now()
-        self.updated_at = dt.now()
-        self.name = name
-
-
-class JSONMixin:
-
-    @staticmethod
-    def to_json(stable, table_query, many=False):
-
-        schema = stable(many=many)
-        json = schema.dump(table_query)
-        return json
-
